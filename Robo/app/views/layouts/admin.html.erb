@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Robo</title>
+    <%= csrf_meta_tags %>
+
+    <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+  </head>
+
+  <body>
+    <nav class="navbar navbar-default navbar-static-top">
+      <div class="container">
+        <div class="navbar-header">
+          <a class="navbar-brand" href="<%= admin_root_path %>">Robo::Admin</a>
+        </div>
+        <ul class="nav navbar-nav">
+          <li <% if params[:controller] == "admin/products" %>class="active"<% end %>><%= link_to "Produkty", admin_products_path %></li>
+          <li <% if params[:controller] == "admin/categories" %>class="active"<% end %>><%= link_to "Kategorie", admin_categories_path %></li>
+          <li <% if params[:controller] == "admin/orders" %>class="active"<% end %>><%= link_to "Zamówienia", admin_orders_path %></li>
+        </ul>
+      </div>
+    </nav>
+    <div class="container-fluid">
+      <%= bootstrap_flash %>
+      <%= yield %>
+    </div>
+  </body>
+</html>

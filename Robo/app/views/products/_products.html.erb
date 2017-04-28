@@ -1,0 +1,23 @@
+<% products.each_slice(3) do |slice| %>
+  <div class="row">
+    <% slice.each do |product| %>
+      <div class="col-md-4">
+        <div class="thumbnail">
+          <%= link_to product_path(product) do %>
+            <%= image_tag Faker::Avatar.image(product.name.parameterize, "640x480", "jpg")  %>
+          <% end %>
+          <div class="caption">
+            <h3><%= link_to product.name, product_path(product) %></h3>
+            <p><%= simple_format(truncate(product.description, length: 90)) %></p>
+            <p class="lead"><%= number_to_currency product.price %></p>
+            <p>
+              <%= link_to add_product_cart_path(product_id: product.id), method: :post, class: "btn btn-primary" do %>
+                <span class="fa fa-shopping-cart"></span> Dodaj do koszyka
+              <% end %>
+            </p>
+          </div>
+        </div>
+      </div>
+    <% end %>
+  </div>
+<% end %>

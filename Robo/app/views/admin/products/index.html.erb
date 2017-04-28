@@ -1,0 +1,38 @@
+<h1>Produkty</h1>
+
+<%= link_to new_admin_product_path, class: "btn btn-success" do %>
+  <span class="fa fa-plus"></span> Dodaj nowy produkt
+<% end %>
+
+<div class="search-form">
+  <%= search_form_for [:admin, @q] do |f| %>
+    <%= f.text_field :name_or_description_or_long_description_cont, placeholder: "Szukaj tekstu" %>
+    <%= f.text_field :price_gt, placeholder: "Cena >" %>
+    <%= f.submit "Szukaj" %>
+  <% end %>
+</div>
+
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th><%= sort_link(@q, :name, "Nazwa") %></th>
+      <th><%= sort_link(@q, :price, "Cena") %></th>
+      <th>Kategoria</th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @products.each do |product| %>
+      <tr>
+        <td><%= product.name %></td>
+        <td><%= number_to_currency product.price %></td>
+        <td><%= product.category.name %></td>
+        <td>
+          <%= link_to "Edycja", edit_admin_product_path(product), class: "btn btn-default btn xs" %>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<%= paginate @products %>
